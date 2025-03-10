@@ -1,0 +1,14 @@
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/bin/Debug/net8.0/StringCalculator
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/bin/Debug/net8.0/StringCalculator.deps.json
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/bin/Debug/net8.0/StringCalculator.runtimeconfig.json
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/bin/Debug/net8.0/StringCalculator.dll
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/bin/Debug/net8.0/StringCalculator.pdb
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/StringCalculator.GeneratedMSBuildEditorConfig.editorconfig
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/StringCalculator.AssemblyInfoInputs.cache
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/StringCalculator.AssemblyInfo.cs
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/StringCalculator.csproj.CoreCompileInputs.cache
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/StringCalculator.dll
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/refint/StringCalculator.dll
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/StringCalculator.pdb
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/StringCalculator.genruntimeconfig.cache
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/ref/StringCalculator.dll
