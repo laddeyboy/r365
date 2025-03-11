@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StringCalculatorTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0317c5cc660d450e61e2b453c6ad176d2b45b7c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e46ec23d3d7467443096ada332f43bbfbd5a51f9")]
 [assembly: System.Reflection.AssemblyProductAttribute("StringCalculatorTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StringCalculatorTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

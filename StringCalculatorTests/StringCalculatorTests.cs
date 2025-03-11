@@ -10,75 +10,49 @@ public class StringCalculatorTests
     [Test]
     public void ItShouldReturnZeroForNoInput()
     {
-        givenNoInput();
+        givenInput("");
         whenCallingCalculate();
         thenResultShouldEqualZero();
     }
 
     [Test]
-    public void ItShouldThrowAnExceptionForMoreThanTwoInputs()
-    {
-        givenMoreThanTwoInputs();
-        whenCallingCalculate();
-        thenExceptionIsThrown();
-    }
-
-    [Test]
     public void ItShouldSubstituteZeroForInvalidInput()
     {
-        givenInvalidInput(); // "5, tytyt"
+        givenInput("5, tytyt");
         whenCallingCalculate();
         thenResultShouldBeCorrect(5);
     }
 
-        [Test]
-    public void ItShouldAddTwoValidInputs()
+    [Test]
+    public void IsShouldWorkForNegativeInputs()
     {
-        givenOnlyTwoValidInputs(); // "3,5"
+        givenInput("4, -3");
         whenCallingCalculate();
-        thenResultShouldBeCorrect(8);
+        thenResultShouldBeCorrect(1);
     }
 
-    void givenNoInput()
+    [Test]
+    public void ItShouldAddValidInputs()
     {
-        input = "";
+        givenInput("4,6,5");
+        whenCallingCalculate();
+        thenResultShouldBeCorrect(15);
+    }
+
+    void givenInput(string src)
+    {
+        input = src;
     }
     void whenCallingCalculate()
     {
-        try
-        {
-            result = StringCalculator.Calculate(input);
-        }
-        catch (Exception ex)
-        {
-            exception = ex;
-        }
+        result = StringCalculator.Calculate(input);
     }
     void thenResultShouldEqualZero()
     {
         Assert.That(result, Is.EqualTo(0));
     }
-
-    void givenMoreThanTwoInputs()
-    {
-        input = "2,3,4";
-    }
-    void thenExceptionIsThrown()
-    {
-        Assert.That(exception?.Message, Is.EqualTo("Input may only be two numbers!"));
-    }
-
-    void givenInvalidInput()
-    {
-        input = "5, tytyt";
-    }
     void thenResultShouldBeCorrect(int num)
     {
         Assert.That(result, Is.EqualTo(num));
-    }
-
-    void givenOnlyTwoValidInputs()
-    {
-        input = "3,5";
     }
 }
