@@ -6,6 +6,9 @@ public class StringCalculatorTests
     string? input = null;
     int? result = null;
     Exception? exception = null;
+    int upperBound = 1000;
+    bool allowNegative = false;
+    string? customDelimiter = null;
 
     [Test]
     public void ItShouldReturnZeroForNoInput()
@@ -43,6 +46,7 @@ public class StringCalculatorTests
     public void ItShouldThrowExceptionForNegativeNumbers()
     {
         givenInput("4,5,-5\n-7,3");
+        givenNegativeArgumentsAreNotAllow();
         whenCallingCalculate();
         thenArgumentOutOfRangeExceptionIsThrownWithValues();
     }
@@ -79,15 +83,58 @@ public class StringCalculatorTests
         thenResultShouldBeCorrect(110);
     }
 
+    [Test]
+    public void ItShouldHandleCustomeDelimiterArgument()
+    {
+        givenACustomDelimiterArgument("!");
+        givenInput("1!2!3");
+        whenCallingCalculate();
+        thenResultShouldBeCorrect(6);
+    }
+
+    [Test]
+    public void ItShouldHandleAllowNegativeArgument()
+    {
+        givenAllowNegativeArgument();
+        givenInput("1,-2\n3");
+        whenCallingCalculate();
+        thenResultShouldBeCorrect(2);
+    }
+
+    public void ItShouldHandleCustomUpperBound()
+    {
+        givenCustomUpperBoundArgument();
+        givenInput("1,900\n3");
+        whenCallingCalculate();
+        thenResultShouldBeCorrect(4);
+    }
+
+    void givenCustomUpperBoundArgument()
+    {
+        upperBound = 900;
+    }
+
     void givenInput(string src)
     {
         input = src;
+    }
+    void givenACustomDelimiterArgument(string? cd)
+    {
+        customDelimiter = cd;
+    }
+    void givenAllowNegativeArgument()
+    {
+        allowNegative = true;
+    }
+    void givenNegativeArgumentsAreNotAllow()
+    {
+        allowNegative = false;
     }
     void whenCallingCalculate()
     {
         try
         {
-            result = StringCalculator.Calculate(input);
+            result = StringCalculator.Calculate(input, upperBound, allowNegative, customDelimiter);
         }
         catch (Exception ex)
         {

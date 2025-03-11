@@ -2,13 +2,12 @@ using System.Text.RegularExpressions;
 
 public class StringCalculator
 {
-  public static int Calculate(string? input)
+  public static int Calculate(string? input, int upperBound, bool allowNegative, string? customDelimiter)
   {
     int sum = 0;
-    int upperBound = 1000;
-    var nums = ValidateInput(input, upperBound);
+    var nums = ValidateInput(input, upperBound, customDelimiter);
     var negativeNumbers = nums.Where(n => n < 0).ToList();
-    if (negativeNumbers.Any())
+    if (negativeNumbers.Any() && !allowNegative)
     {
       var errorValues = string.Join(", ", negativeNumbers);
       throw new ArgumentOutOfRangeException(errorValues);
@@ -21,13 +20,18 @@ public class StringCalculator
     return sum;
   }
 
-  private static List<int> ValidateInput(string? input, int upperBound)
+  private static List<int> ValidateInput(string? input, int upperBound, string? customDelimiter)
   {
     var nums = new List<int>();
     if (string.IsNullOrEmpty(input)) return [0];
     // string literal \n needs to be converted to actual newline \n first
     var denormedInput = input.Trim().Replace("\\n", "\n");
     var pattern = $@"\s*,\s*|\s*\n\s*";
+    if (customDelimiter is not null)
+    {
+      var escapedDelimiter = Regex.Escape(customDelimiter);
+      pattern = pattern + $@"|\s*{escapedDelimiter}\s*";
+    }
     var (delimiters, newInput) = ExtractDelimiter(denormedInput);
     if (delimiters.Count > 0)
     {
