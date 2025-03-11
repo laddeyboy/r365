@@ -12,3 +12,4 @@
 /Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/StringCalculator.pdb
 /Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/StringCalculator.genruntimeconfig.cache
 /Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/ref/StringCalculator.dll
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculator/obj/Debug/net8.0/StringCalculator.sourcelink.json

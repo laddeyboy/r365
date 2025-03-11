@@ -102,3 +102,4 @@
 /Users/laddy/Documents/Learning_Csharp/R365/StringCalculatorTests/obj/Debug/net8.0/StringCalculatorTests.pdb
 /Users/laddy/Documents/Learning_Csharp/R365/StringCalculatorTests/obj/Debug/net8.0/StringCalculatorTests.genruntimeconfig.cache
 /Users/laddy/Documents/Learning_Csharp/R365/StringCalculatorTests/obj/Debug/net8.0/ref/StringCalculatorTests.dll
+/Users/laddy/Documents/Learning_Csharp/R365/StringCalculatorTests/obj/Debug/net8.0/StringCalculatorTests.sourcelink.json
