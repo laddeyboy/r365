@@ -27,11 +27,14 @@ public class StringCalculator
     // string literal \n needs to be converted to actual newline \n first
     var denormedInput = input.Trim().Replace("\\n", "\n");
     var pattern = $@"\s*,\s*|\s*\n\s*";
-    var (delimiter, newInput) = ExtractDelimiter(denormedInput);
-    if(delimiter is not null)
+    var (delimiters, newInput) = ExtractDelimiter(denormedInput);
+    if (delimiters is not null)
     {
-      var escapedDelimiter = Regex.Escape(delimiter);
-      pattern = pattern + $@"|\s*{escapedDelimiter}\s*";
+      foreach (var delimiter in delimiters)
+      {
+        var escapedDelimiter = Regex.Escape(delimiter);
+        pattern = pattern + $@"|\s*{escapedDelimiter}\s*";
+      }
     }
     var request = Regex.Split(newInput, pattern).ToList();
 
@@ -42,18 +45,31 @@ public class StringCalculator
     return nums;
   }
 
-  private static (string?, string) ExtractDelimiter(string input)
+  private static (List<string>?, string) ExtractDelimiter(string input)
   {
     string delimiterKey = "//";
-    int newLineIndex = input.IndexOf('\n');
-    if(input.StartsWith(delimiterKey))
+    if (!input.StartsWith(delimiterKey))
     {
-      return (
-        input.Substring(delimiterKey.Length, newLineIndex - delimiterKey.Length),
-        input.Substring(newLineIndex + 1)
-      );
-        
+      return (null, input);
     }
-    return (null, input);
+    
+    int newLineIndex = input.IndexOf('\n');
+    var delimiterString = input.Substring(delimiterKey.Length, newLineIndex - delimiterKey.Length);
+    var delimiters = new List<string>();
+    string bracketPattern = @"\[(.*?)\]";
+    Match match = Regex.Match(delimiterString, bracketPattern);
+    if (match.Success)
+    {
+      var matchedValue = match.Groups[0].Value;
+      delimiters.Add(matchedValue.Substring(1, matchedValue.Length - 2));
+    } else 
+    {
+      delimiters.Add(delimiterString);
+    }
+
+    return (
+      delimiters,
+      input.Substring(newLineIndex + 1)
+    );
   }
 }

@@ -61,7 +61,15 @@ public class StringCalculatorTests
         givenInput("//#\n2#5");
         whenCallingCalculate();
         thenResultShouldBeCorrect(7);
-    } 
+    }
+
+    [Test]
+    public void ItShouldHandleCustomDelimiters()
+    {
+        givenInput("//[***]\n11***22***33");
+        whenCallingCalculate();
+        thenResultShouldBeCorrect(66);
+    }
 
     void givenInput(string src)
     {
