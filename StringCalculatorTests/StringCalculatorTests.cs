@@ -55,6 +55,14 @@ public class StringCalculatorTests
         thenResultShouldBeCorrect(8);
     }
 
+    [Test]
+    public void ItShouldHandleSingleCharacterCustomDelimiter()
+    {
+        givenInput("//#\n2#5");
+        whenCallingCalculate();
+        thenResultShouldBeCorrect(7);
+    } 
+
     void givenInput(string src)
     {
         input = src;
