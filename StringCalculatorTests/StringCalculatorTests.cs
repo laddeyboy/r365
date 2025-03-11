@@ -5,6 +5,7 @@ public class StringCalculatorTests
 {
     string? input = null;
     int? result = null;
+    Exception? exception = null;
 
     [Test]
     public void ItShouldReturnZeroForNoInput()
@@ -23,14 +24,6 @@ public class StringCalculatorTests
     }
 
     [Test]
-    public void IsShouldWorkForNegativeInputs()
-    {
-        givenInput("4, -3");
-        whenCallingCalculate();
-        thenResultShouldBeCorrect(1);
-    }
-
-    [Test]
     public void ItShouldAddValidInputs()
     {
         givenInput("4,6,5");
@@ -41,9 +34,16 @@ public class StringCalculatorTests
     [Test]
     public void ItShouldHandleInputWithNewlineDelimter()
     {
-        givenInput("1\n2,3\n-4\n5,6,7\n8\n9,10");
+        givenInput("1\n2,3\n4\n5,6,7\n8\n9,10");
         whenCallingCalculate();
-        thenResultShouldBeCorrect(47);
+        thenResultShouldBeCorrect(55);
+    }
+
+    public void IsShouldThrowExceptionForNegativeNumbers()
+    {
+        givenInput("4,5,-5\n-7,3");
+        whenCallingCalculate();
+        thenArgumentOutOfRangeExceptionIsThrownWithValues();
     }
 
     void givenInput(string src)
@@ -52,7 +52,13 @@ public class StringCalculatorTests
     }
     void whenCallingCalculate()
     {
-        result = StringCalculator.Calculate(input);
+        try
+        {
+            result = StringCalculator.Calculate(input);
+        } catch(Exception ex)
+        {
+            exception = ex;
+        }
     }
     void thenResultShouldEqualZero()
     {
@@ -61,5 +67,10 @@ public class StringCalculatorTests
     void thenResultShouldBeCorrect(int num)
     {
         Assert.That(result, Is.EqualTo(num));
+    }
+
+    void thenArgumentOutOfRangeExceptionIsThrownWithValues()
+    {
+        Assert.That(exception!.Message, Does.Contain("-5, -7"));
     }
 }
