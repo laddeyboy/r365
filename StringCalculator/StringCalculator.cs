@@ -2,22 +2,36 @@ public class StringCalculator
 {
   public static int Calculate(string? input)
   {
-    int sum = 0;
-    if (string.IsNullOrEmpty(input)) return sum;
+    try
+    {
+      int sum = 0;
+      var nums = ValidateInput(input);
+      foreach (var num in nums)
+      {
+        sum += num;
+      }
+      return sum;
+    }
+    catch (Exception)
+    {
+      throw;
+    }
+  }
+
+  private static List<int> ValidateInput(string? input)
+  {
+    var nums = new List<int>();
+    if (string.IsNullOrEmpty(input)) return [0];
     var request = input?.Split(',');
     if (request!.Length > 2)
     {
       throw new ArgumentException("Input may only be two numbers!");
     }
 
-    foreach (var num in request)
+    foreach (var req in request)
     {
-      if (int.TryParse(num.Trim(), out int n))
-      {
-        sum += n;
-      }
+      nums.Add(int.TryParse(req.Trim(), out int n) ? n : 0);
     }
-
-    return sum;
+    return nums;
   }
 }
