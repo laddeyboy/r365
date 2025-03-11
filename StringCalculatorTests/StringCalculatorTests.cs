@@ -71,6 +71,14 @@ public class StringCalculatorTests
         thenResultShouldBeCorrect(66);
     }
 
+    [Test]
+    public void ItShouldHandleMultipleCustomDelimiters()
+    {
+        givenInput("//[*][!!][r9r]\n11r9r22*hh*33!!44");
+        whenCallingCalculate();
+        thenResultShouldBeCorrect(110);
+    }
+
     void givenInput(string src)
     {
         input = src;

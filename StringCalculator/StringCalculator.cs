@@ -28,7 +28,7 @@ public class StringCalculator
     var denormedInput = input.Trim().Replace("\\n", "\n");
     var pattern = $@"\s*,\s*|\s*\n\s*";
     var (delimiters, newInput) = ExtractDelimiter(denormedInput);
-    if (delimiters is not null)
+    if (delimiters.Count > 0)
     {
       foreach (var delimiter in delimiters)
       {
@@ -36,8 +36,7 @@ public class StringCalculator
         pattern = pattern + $@"|\s*{escapedDelimiter}\s*";
       }
     }
-    var request = Regex.Split(newInput, pattern).ToList();
-
+    var request = Regex.Split(newInput, pattern);
     foreach (var req in request!)
     {
       nums.Add((int.TryParse(req.Trim(), out int n) && n < upperBound) ? n : 0);
@@ -45,31 +44,24 @@ public class StringCalculator
     return nums;
   }
 
-  private static (List<string>?, string) ExtractDelimiter(string input)
+  private static (List<string>, string) ExtractDelimiter(string input)
   {
     string delimiterKey = "//";
-    if (!input.StartsWith(delimiterKey))
-    {
-      return (null, input);
-    }
-    
-    int newLineIndex = input.IndexOf('\n');
-    var delimiterString = input.Substring(delimiterKey.Length, newLineIndex - delimiterKey.Length);
     var delimiters = new List<string>();
-    string bracketPattern = @"\[(.*?)\]";
-    Match match = Regex.Match(delimiterString, bracketPattern);
-    if (match.Success)
+    var modifiedInput = input;
+    if (input.StartsWith(delimiterKey))
     {
-      var matchedValue = match.Groups[0].Value;
-      delimiters.Add(matchedValue.Substring(1, matchedValue.Length - 2));
-    } else 
-    {
-      delimiters.Add(delimiterString);
+      int newLineIndex = input.IndexOf('\n');
+      var delimiterString = input.Substring(delimiterKey.Length, newLineIndex - delimiterKey.Length);
+      modifiedInput = input.Substring(newLineIndex + 1);
+      string bracketPattern = @"\[(.*?)\]";
+      MatchCollection matches = Regex.Matches(delimiterString, bracketPattern);
+      delimiters = matches.Where(x => x.Groups[1].Success).Select(x => x.Groups[1].Value).ToList();
+      if (delimiters.Count == 0)
+      {
+        delimiters.Add(delimiterString);
+      }
     }
-
-    return (
-      delimiters,
-      input.Substring(newLineIndex + 1)
-    );
+    return (delimiters, modifiedInput);
   }
 }
