@@ -39,11 +39,20 @@ public class StringCalculatorTests
         thenResultShouldBeCorrect(55);
     }
 
-    public void IsShouldThrowExceptionForNegativeNumbers()
+    [Test]
+    public void ItShouldThrowExceptionForNegativeNumbers()
     {
         givenInput("4,5,-5\n-7,3");
         whenCallingCalculate();
         thenArgumentOutOfRangeExceptionIsThrownWithValues();
+    }
+
+    [Test]
+    public void ItShouldInvalidateNumbersGreaterThan1000()
+    {
+        givenInput("2,1001,6");
+        whenCallingCalculate();
+        thenResultShouldBeCorrect(8);
     }
 
     void givenInput(string src)
@@ -55,7 +64,8 @@ public class StringCalculatorTests
         try
         {
             result = StringCalculator.Calculate(input);
-        } catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             exception = ex;
         }
