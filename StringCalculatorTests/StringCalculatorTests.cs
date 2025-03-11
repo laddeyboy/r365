@@ -5,7 +5,6 @@ public class StringCalculatorTests
 {
     string? input = null;
     int? result = null;
-    Exception? exception = null;
 
     [Test]
     public void ItShouldReturnZeroForNoInput()
@@ -37,6 +36,14 @@ public class StringCalculatorTests
         givenInput("4,6,5");
         whenCallingCalculate();
         thenResultShouldBeCorrect(15);
+    }
+
+    [Test]
+    public void ItShouldHandleInputWithNewlineDelimter()
+    {
+        givenInput("1\n2,3,4,\n5,6,7\n8\n,9,10\n11,12");
+        whenCallingCalculate();
+        thenResultShouldBeCorrect(78);
     }
 
     void givenInput(string src)
