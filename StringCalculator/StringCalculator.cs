@@ -17,6 +17,7 @@ public class StringCalculator
     {
       sum += num;
     }
+    Console.WriteLine($"{string.Join("+", nums)}={sum}");
     return sum;
   }
 

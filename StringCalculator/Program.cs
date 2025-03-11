@@ -4,7 +4,6 @@ var input = Console.ReadLine();
 try
 {
   var result = StringCalculator.Calculate(input);
-  Console.WriteLine(result);
 }
 catch (Exception ex)
 {
