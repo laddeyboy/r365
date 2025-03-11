@@ -41,9 +41,9 @@ public class StringCalculatorTests
     [Test]
     public void ItShouldHandleInputWithNewlineDelimter()
     {
-        givenInput("1\n2,3,4,\n5,6,7\n8\n,9,10\n11,12");
+        givenInput("1\n2,3\n-4\n5,6,7\n8\n9,10");
         whenCallingCalculate();
-        thenResultShouldBeCorrect(78);
+        thenResultShouldBeCorrect(47);
     }
 
     void givenInput(string src)

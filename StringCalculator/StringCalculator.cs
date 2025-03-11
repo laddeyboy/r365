@@ -17,7 +17,8 @@ public class StringCalculator
   {
     var nums = new List<int>();
     if (string.IsNullOrEmpty(input)) return [0];
-    var request = Regex.Split(input, @"[,\n]");
+    // string literal \n needs to be converted to actual newline \n first
+    var request = Regex.Split(input.Trim().Replace("\\n", "\n"), @"\s*,\s*|\s*\n\s*");
     foreach (var req in request!)
     {
       nums.Add(int.TryParse(req.Trim(), out int n) ? n : 0);
