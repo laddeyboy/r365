@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "jaZkI24i29A=",
+  "dgSpecHash": "o72ctbCa+Ss=",
   "success": true,
   "projectFilePath": "/Users/laddy/Documents/Learning_Csharp/R365/StringCalculatorTests/StringCalculatorTests.csproj",
   "expectedPackageFiles": [
     "/Users/laddy/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
     "/Users/laddy/.nuget/packages/microsoft.codecoverage/17.8.0/microsoft.codecoverage.17.8.0.nupkg.sha512",
+    "/Users/laddy/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.3/microsoft.extensions.dependencyinjection.9.0.3.nupkg.sha512",
+    "/Users/laddy/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.3/microsoft.extensions.dependencyinjection.abstractions.9.0.3.nupkg.sha512",
     "/Users/laddy/.nuget/packages/microsoft.net.test.sdk/17.8.0/microsoft.net.test.sdk.17.8.0.nupkg.sha512",
     "/Users/laddy/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/Users/laddy/.nuget/packages/microsoft.testplatform.objectmodel/17.8.0/microsoft.testplatform.objectmodel.17.8.0.nupkg.sha512",
@@ -16,6 +18,7 @@
     "/Users/laddy/.nuget/packages/nunit/3.14.0/nunit.3.14.0.nupkg.sha512",
     "/Users/laddy/.nuget/packages/nunit.analyzers/3.9.0/nunit.analyzers.3.9.0.nupkg.sha512",
     "/Users/laddy/.nuget/packages/nunit3testadapter/4.5.0/nunit3testadapter.4.5.0.nupkg.sha512",
+    "/Users/laddy/.nuget/packages/system.commandline/2.0.0-beta4.22272.1/system.commandline.2.0.0-beta4.22272.1.nupkg.sha512",
     "/Users/laddy/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512"
   ],
   "logs": []

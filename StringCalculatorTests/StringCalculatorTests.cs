@@ -113,7 +113,6 @@ public class StringCalculatorTests
     {
         upperBound = 900;
     }
-
     void givenInput(string src)
     {
         input = src;
@@ -134,7 +133,8 @@ public class StringCalculatorTests
     {
         try
         {
-            result = StringCalculator.Calculate(input, upperBound, allowNegative, customDelimiter);
+            StringCalculator stringCalculator = new StringCalculator();
+            result = stringCalculator.Calculate(input, upperBound, allowNegative, customDelimiter);
         }
         catch (Exception ex)
         {

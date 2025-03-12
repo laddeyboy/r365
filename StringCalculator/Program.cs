@@ -1,60 +1,24 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using Microsoft.Extensions.DependencyInjection;
 
-string? delimiter = null;
-bool allowNegative = false;
-int upperBound = 1000;
+var services = new ServiceCollection()
+    .AddSingleton<ICommandLineService, CommandLineService>()
+    .AddSingleton<IStringCalculator, StringCalculator>()
+    .AddSingleton<CalculatorRunner>()
+    .BuildServiceProvider();
 
-for (int i = 0; i < args.Length; i++)
-{
-  switch (args[i].ToLower())
-  {
-    case "-d":
-    case "--delimiter":
-      if (i + 1 < args.Length)
-      {
-        delimiter = args[i + 1];
-        i++;
-      }
-      break;
+var commandLineService = services.GetRequiredService<ICommandLineService>();
+var calculator = services.GetRequiredService<IStringCalculator>();
+var runner = services.GetRequiredService<CalculatorRunner>();
 
-    case "-n":
-    case "--negatives":
-      allowNegative = true;
-      break;
+var (delimiter, allowNegative, upperBound, operation) = await commandLineService.ParseArgumentsAsync(args);
 
-    case "-u":
-    case "--upper-bound":
-      if (i + 1 < args.Length && int.TryParse(args[i + 1], out int bound))
-      {
-        upperBound = bound;
-        i++;
-      }
-      break;
-
-    default:
-      Console.WriteLine($"Unknown argument: {args[i]}");
-      break;
-  }
-}
-
-// Example usage of the parsed values
-Console.WriteLine($"Delimiter: {delimiter}");
+Console.WriteLine($"Delimiter: {delimiter ?? "default"}");
 Console.WriteLine($"Allow Negative Numbers: {allowNegative}");
 Console.WriteLine($"Upper Bound: {upperBound}");
+Console.WriteLine($"Operation: {operation}");
+
+runner.Run(calculator, upperBound, allowNegative, delimiter, operation);
 
 
-Console.WriteLine("Press Ctrl+C to exit.");
-while (true)
-{
-  Console.Write("Please provide input: ");
-  var input = Console.ReadLine();
-  try
-  {
-    var result = StringCalculator.Calculate(input, upperBound, allowNegative, delimiter);
-  }
-  catch (Exception ex)
-  {
-    Console.WriteLine(ex.Message);
-  }
-}
 

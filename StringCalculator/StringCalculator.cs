@@ -1,72 +1,77 @@
 using System.Text.RegularExpressions;
 
-public class StringCalculator
+public interface IStringCalculator
 {
-  public static int Calculate(string? input, int upperBound, bool allowNegative, string? customDelimiter)
-  {
-    int sum = 0;
-    var nums = ValidateInput(input, upperBound, customDelimiter);
-    var negativeNumbers = nums.Where(n => n < 0).ToList();
-    if (negativeNumbers.Any() && !allowNegative)
-    {
-      var errorValues = string.Join(", ", negativeNumbers);
-      throw new ArgumentOutOfRangeException(errorValues);
-    }
-    foreach (var num in nums)
-    {
-      sum += num;
-    }
-    Console.WriteLine($"{string.Join("+", nums)}={sum}");
-    return sum;
-  }
+    int Calculate(string? input, int upperBound, bool allowNegative, string? customDelimiter, string? operation);
+}
 
-  private static List<int> ValidateInput(string? input, int upperBound, string? customDelimiter)
-  {
-    var nums = new List<int>();
-    if (string.IsNullOrEmpty(input)) return [0];
-    // string literal \n needs to be converted to actual newline \n first
-    var denormedInput = input.Trim().Replace("\\n", "\n");
-    var pattern = $@"\s*,\s*|\s*\n\s*";
-    if (customDelimiter is not null)
+public class StringCalculator : IStringCalculator
+{
+    public int Calculate(string? input, int upperBound, bool allowNegative, string? customDelimiter, string? operation)
     {
-      var escapedDelimiter = Regex.Escape(customDelimiter);
-      pattern = pattern + $@"|\s*{escapedDelimiter}\s*";
+        int sum = 0;
+        var nums = ValidateInput(input, upperBound, customDelimiter);
+        var negativeNumbers = nums.Where(n => n < 0).ToList();
+        if (negativeNumbers.Any() && !allowNegative)
+        {
+            var errorValues = string.Join(", ", negativeNumbers);
+            throw new ArgumentOutOfRangeException(errorValues);
+        }
+        foreach (var num in nums)
+        {
+            sum += num;
+        }
+        Console.WriteLine($"{string.Join("+", nums)}={sum}");
+        return sum;
     }
-    var (delimiters, newInput) = ExtractDelimiter(denormedInput);
-    if (delimiters.Count > 0)
-    {
-      foreach (var delimiter in delimiters)
-      {
-        var escapedDelimiter = Regex.Escape(delimiter);
-        pattern = pattern + $@"|\s*{escapedDelimiter}\s*";
-      }
-    }
-    var request = Regex.Split(newInput, pattern);
-    foreach (var req in request!)
-    {
-      nums.Add((int.TryParse(req.Trim(), out int n) && n < upperBound) ? n : 0);
-    }
-    return nums;
-  }
 
-  private static (List<string>, string) ExtractDelimiter(string input)
-  {
-    string delimiterKey = "//";
-    var delimiters = new List<string>();
-    var modifiedInput = input;
-    if (input.StartsWith(delimiterKey))
+    private static List<int> ValidateInput(string? input, int upperBound, string? customDelimiter)
     {
-      int newLineIndex = input.IndexOf('\n');
-      var delimiterString = input.Substring(delimiterKey.Length, newLineIndex - delimiterKey.Length);
-      modifiedInput = input.Substring(newLineIndex + 1);
-      string bracketPattern = @"\[(.*?)\]";
-      MatchCollection matches = Regex.Matches(delimiterString, bracketPattern);
-      delimiters = matches.Where(x => x.Groups[1].Success).Select(x => x.Groups[1].Value).ToList();
-      if (delimiters.Count == 0)
-      {
-        delimiters.Add(delimiterString);
-      }
+        var nums = new List<int>();
+        if (string.IsNullOrEmpty(input)) return [0];
+        // string literal \n needs to be converted to actual newline \n first
+        var denormedInput = input.Trim().Replace("\\n", "\n");
+        var pattern = $@"\s*,\s*|\s*\n\s*";
+        if (customDelimiter is not null)
+        {
+            var escapedDelimiter = Regex.Escape(customDelimiter);
+            pattern = pattern + $@"|\s*{escapedDelimiter}\s*";
+        }
+        var (delimiters, newInput) = ExtractDelimiter(denormedInput);
+        if (delimiters.Count > 0)
+        {
+            foreach (var delimiter in delimiters)
+            {
+                var escapedDelimiter = Regex.Escape(delimiter);
+                pattern = pattern + $@"|\s*{escapedDelimiter}\s*";
+            }
+        }
+        var request = Regex.Split(newInput, pattern);
+        foreach (var req in request!)
+        {
+            nums.Add((int.TryParse(req.Trim(), out int n) && n < upperBound) ? n : 0);
+        }
+        return nums;
     }
-    return (delimiters, modifiedInput);
-  }
+
+    private static (List<string>, string) ExtractDelimiter(string input)
+    {
+        string delimiterKey = "//";
+        var delimiters = new List<string>();
+        var modifiedInput = input;
+        if (input.StartsWith(delimiterKey))
+        {
+            int newLineIndex = input.IndexOf('\n');
+            var delimiterString = input.Substring(delimiterKey.Length, newLineIndex - delimiterKey.Length);
+            modifiedInput = input.Substring(newLineIndex + 1);
+            string bracketPattern = @"\[(.*?)\]";
+            MatchCollection matches = Regex.Matches(delimiterString, bracketPattern);
+            delimiters = matches.Where(x => x.Groups[1].Success).Select(x => x.Groups[1].Value).ToList();
+            if (delimiters.Count == 0)
+            {
+                delimiters.Add(delimiterString);
+            }
+        }
+        return (delimiters, modifiedInput);
+    }
 }
