@@ -1,11 +1,15 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator", "StringCalculator\StringCalculator.csproj", "{CFDC74A6-1021-4C49-A33E-B1C524CBA34D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculatorConsole", "StringCalculatorConsole\StringCalculatorConsole.csproj", "{CFDC74A6-1021-4C49-A33E-B1C524CBA34D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculatorTests", "StringCalculatorTests\StringCalculatorTests.csproj", "{201C154D-2651-4262-A96B-10A33311D3BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculatorApi", "StringCalculatorApi\StringCalculatorApi.csproj", "{AE3FDF4C-D6AE-436F-9AC9-4710F1B3FF75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculatorHandlers", "StringCalculatorHandlers\StringCalculatorHandlers.csproj", "{A9EC71F2-F74C-487E-AFEB-DCC76B6C830D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +28,13 @@ Global
 		{201C154D-2651-4262-A96B-10A33311D3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{201C154D-2651-4262-A96B-10A33311D3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{201C154D-2651-4262-A96B-10A33311D3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE3FDF4C-D6AE-436F-9AC9-4710F1B3FF75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE3FDF4C-D6AE-436F-9AC9-4710F1B3FF75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE3FDF4C-D6AE-436F-9AC9-4710F1B3FF75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE3FDF4C-D6AE-436F-9AC9-4710F1B3FF75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9EC71F2-F74C-487E-AFEB-DCC76B6C830D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9EC71F2-F74C-487E-AFEB-DCC76B6C830D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9EC71F2-F74C-487E-AFEB-DCC76B6C830D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9EC71F2-F74C-487E-AFEB-DCC76B6C830D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -134,7 +134,7 @@ public class StringCalculatorTests
         try
         {
             StringCalculator stringCalculator = new StringCalculator();
-            result = stringCalculator.Calculate(input, upperBound, allowNegative, customDelimiter);
+            result = stringCalculator.Calculate(input, upperBound, allowNegative, customDelimiter, null);
         }
         catch (Exception ex)
         {
