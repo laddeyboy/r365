@@ -1,3 +1,5 @@
+using StringCalculatorHandlers.Handlers;
+
 namespace StringCalculatorTests;
 
 [TestFixture]
@@ -129,12 +131,17 @@ public class StringCalculatorTests
     {
         allowNegative = false;
     }
-    void whenCallingCalculate()
+    async void whenCallingCalculate()
     {
         try
         {
-            StringCalculator stringCalculator = new StringCalculator();
-            result = stringCalculator.Calculate(input, upperBound, allowNegative, customDelimiter, null);
+            StringCalculatorHandler stringCalculator = new StringCalculatorHandler();
+            result = await stringCalculator.Calculate(new() {
+                Input = input,
+                UpperBound = upperBound,
+                AllowNegatives = allowNegative,
+              CustomDelimiter = customDelimiter
+            });
         }
         catch (Exception ex)
         {

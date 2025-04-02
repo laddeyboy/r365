@@ -16,7 +16,7 @@
   <ItemGroup>
     <Using Include="NUnit.Framework" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StringCalculator\StringCalculator.csproj" />
+    <ItemGroup>
+    <ProjectReference Include="..\StringCalculatorHandlers\StringCalculatorHandlers.csproj" />
   </ItemGroup>
 </Project>
